@@ -1,8 +1,9 @@
+require './lib/dictionary'
+
 if ARGV.length != 2 
     p "Error"
     exit
 end
-
 
 message = ARGV[0]
 braille = ARGV[1]
@@ -16,4 +17,6 @@ character_count = text_array.join.length
 p "Created '#{braille}' containing #{character_count} characters"
 
 message_input = text_array.join
-braille_file.write(message_input)
+dictionary = Dictionary.new(message_input)
+dictionary.format_braille
+# require 'pry'; binding.pry
