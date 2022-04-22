@@ -7,8 +7,8 @@ end
 message = ARGV[0]
 braille = ARGV[1]
 
-message_file = File.open(message, "r") #makes it a file object, r makes it readable
-braille_file = File.open(braille, "w")
+message_file = File.open(ARGV[0], "r") #makes it a file object, r makes it readable
+braille_file = File.open(ARGV[1], "w")
 
 text_array = message_file.readlines
 character_count = text_array.join.length
