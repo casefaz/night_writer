@@ -52,13 +52,13 @@ attr_reader :braille_characters, :message_input
             middle << receive_character(letter)[1]
             bottom << receive_character(letter)[2]
         end
-        braille.write("#{top}\n#{middle}\n#{bottom}") 
-        return "#{top}\n#{middle}\n#{bottom}"
+        #any row is more than 80 characters, split the next 80 characters on a new line - can check any row - split into gorups of 80, or write to the file as is
+        if top.length <= 80
+            braille.write("#{top}\n#{middle}\n#{bottom}") 
+        else
+            #figure out how to split
+        end
+        # require 'pry'; binding.pry
         braille.close
-    end
-
-    def split_line
-        format_braille.scan(/.{40}/)
-        require 'pry'; binding.pry
     end
 end
