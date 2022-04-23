@@ -22,12 +22,18 @@ RSpec.describe Dictionary do
 
         it '#receive_character' do
             expect(@dictionary.receive_character("a")).to eq (["0.", "..", ".."])
+            expect(@dictionary.receive_character("!")).to eq("Not familiar, unfortunately")
         end
 
         it 'can format the braille' do
             @dictionary2 = Dictionary.new("hello world")
 
             expect(@dictionary2.format_braille.length).to eq(68) 
+        end
+
+        it 'splits characters over 80 lines' do
+            @dictionary3 = Dictionary.new("the ring cannot be destroyed by anything here that we possess") 
+            expect(@dictionary3.split_line).to eq(string)
         end
 
 end

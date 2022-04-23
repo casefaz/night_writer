@@ -34,12 +34,15 @@ attr_reader :braille_characters, :message_input
         @message_input = message_input
     end
 
-    def receive_character(character) #take input from message and return matching braille character
-        #write to txt file now or return a string and write to txt later
+    def receive_character(character)
+       if @braille_characters.keys.include?(character) == false
+        p "Not familiar, unfortunately"
+       else
         @braille_characters[character]
+       end
     end
 
-    def format_braille #consider edge cases, no more than 80 characters(40 braille characters)
+    def format_braille 
         braille = File.open("braille.txt", "w")
         top = ""
         middle = ""
@@ -49,9 +52,13 @@ attr_reader :braille_characters, :message_input
             middle << receive_character(letter)[1]
             bottom << receive_character(letter)[2]
         end
-        # require 'pry'; binding.pry
-        braille.write("#{top}\n#{middle}\n#{bottom}")
+        braille.write("#{top}\n#{middle}\n#{bottom}") 
         return "#{top}\n#{middle}\n#{bottom}"
-        # require 'pry'; binding.pry
+        braille.close
+    end
+
+    def split_line
+        format_braille.scan(/.{40}/)
+        require 'pry'; binding.pry
     end
 end
