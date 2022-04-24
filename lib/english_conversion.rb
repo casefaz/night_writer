@@ -32,11 +32,11 @@ attr_reader :braille_message, :english_characters
         input_collector.join
     end
 
-    def braille_to_english(braille)
-        if @english_characters.keys.include?(braille)
-            @english_characters[braille]
-        end
-        # require 'pry'; binding.pry
-    end
+    # def braille_to_english(braille)
+    #     if @english_characters.keys.include?(braille)
+    #         @english_characters[braille]
+    #     end
+    #     # require 'pry'; binding.pry
+    # end
 
 end

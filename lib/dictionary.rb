@@ -40,7 +40,7 @@ attr_reader :braille_characters, :english_characters
         english_characters.each do |key, value|
             english_characters[key]= value.join
         end
-        require 'pry';binding.pry
+        # require 'pry';binding.pry
         return english_characters.invert
     end
 

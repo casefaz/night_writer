@@ -12,7 +12,7 @@ RSpec.describe EnglishConversion do
     end
 
     it 'has an english hash' do
-        expect(@english_conversion.english_characters("0..000").to eq("z")
+        expect(@english_conversion.english_characters["0..000"]).to eq("z")
     end
 
     it 'can read braille characters' do 
@@ -23,19 +23,4 @@ RSpec.describe EnglishConversion do
         expect(@english_conversion.translate_to_english).to eq("hello")
     end
 
-
-    xit 'can format the braille into english' do 
-        @english_conversion2.read_braille
-        newish_file = File.open("test_braille.txt", "r")
-        expected_characters = newish_file.read
-        newish_file.close
-        expect(expected_characters).to eq("hi")
-    end
-
-    it 'fake test' do 
-        newish_file = File.open("test_braille.txt", "r")
-        expected_characters = newish_file.readlines
-        newish_file.close
-        # require'pry';binding.pry
-    end
 end
