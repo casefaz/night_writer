@@ -1,6 +1,6 @@
 class Dictionary
 
-attr_reader :braille_characters, :message_input
+attr_reader :braille_characters, :message_input, :english_characters
     def initialize(message_input)
         @braille_characters = {
         "a" => ["0.", "..", ".."],
