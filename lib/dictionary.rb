@@ -34,11 +34,11 @@ attr_reader :braille_characters, :message_input
         @message_input = message_input
     end
 
-    def receive_character(character)
-       if @braille_characters.keys.include?(character) == false
+    def receive_character(english_character)
+       if @braille_characters.keys.include?(english_character) == false
         p "Not familiar, unfortunately"
        else
-        @braille_characters[character]
+        @braille_characters[english_character]
        end
     end
 
@@ -47,18 +47,23 @@ attr_reader :braille_characters, :message_input
         top = ""
         middle = ""
         bottom = ""
-        @message_input.split("").each do |letter|
+        split_lines
+        split_message.split("").each do |letter|
             top << receive_character(letter)[0]
             middle << receive_character(letter)[1]
             bottom << receive_character(letter)[2]
         end
-        #any row is more than 80 characters, split the next 80 characters on a new line - can check any row - split into gorups of 80, or write to the file as is
-        if top.length <= 80
-            braille.write("#{top}\n#{middle}\n#{bottom}") 
-        else
-            #figure out how to split
-        end
-        # require 'pry'; binding.pry
+        braille.write("#{top}\n#{middle}\n#{bottom}")
+            #figure out how to split either every 40 english characters(@message_input) or every 80 braille characters(braille.write) onto new lines
         braille.close
+    end
+
+    def split_lines
+        under_40 = []
+        while @message_input.length > 0
+            # require 'pry'; binding.pry
+            under_40 << @message_input.slice!(0..39)
+        end
+        under_40
     end
 end

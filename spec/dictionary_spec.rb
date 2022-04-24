@@ -34,4 +34,11 @@ RSpec.describe Dictionary do
             expect(File.size("braille.txt")).to eq(32)
         end
 
+        it 'can split lines over 80 dots' do 
+            dictionary3 = Dictionary.new("the ring cannot be destroyed by anything here that we possess") 
+            dictionary3.format_braille
+
+            expect(dictionary3.split_lines).to be_a(Array)
+        end
+
 end
