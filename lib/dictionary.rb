@@ -31,10 +31,17 @@ attr_reader :braille_characters, :english_characters
         "z" => ["0.", ".0", "00"],
         " " => ["..", "..", ".."]
         }
-        # @message_input = message_input
-        @english_characters = @braille_characters.invert
         # @braille_input = braille_input
         # require 'pry'; binding.pry
+    end
+
+    def english_characters
+        english_characters = @braille_characters
+        english_characters.each do |key, value|
+            english_characters[key]= value.join
+        end
+        require 'pry';binding.pry
+        return english_characters.invert
     end
 
     # def receive_character(english_character)
