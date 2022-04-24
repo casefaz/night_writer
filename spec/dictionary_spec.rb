@@ -25,20 +25,12 @@ RSpec.describe Dictionary do
             expect(@dictionary.receive_character("!")).to eq("Not familiar, unfortunately")
         end
 
-        it 'prints braille to the braille file' do
-            # dictionary3 = Dictionary.new("the ring cannot be destroyed by anything here that we possess") 
-            # dictionary3.format_braille
-            dictionary2 = Dictionary.new("hello")
-            dictionary2.format_braille
-
-            expect(File.size("braille.txt")).to eq(32)
-        end
-
         it 'can split lines over 80 dots' do 
             dictionary3 = Dictionary.new("the ring cannot be destroyed by anything here that we possess") 
             dictionary3.format_braille
 
-            expect(dictionary3.split_lines).to be_a(Array)
+            expect(dictionary3.split_lines("the ring cannot be destroyed by anything here that we possess")).to be_a(Array)
+            expect(File.size("braille.txt")).to eq(368)
         end
 
 end
