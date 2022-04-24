@@ -6,6 +6,7 @@ RSpec.describe Dictionary do
     before :each do 
         @dictionary = Dictionary.new("a")
         @dictionary2 = Dictionary.new("hello")
+        @dictionary3 = Dictionary.new("0./n00/n../n")
     end
 
         it 'exists' do 
@@ -41,10 +42,15 @@ RSpec.describe Dictionary do
         end
 
         it 'can format the braille into english' do 
-            
+            @dictionary3.format_braille
+            @dictionary3.read_braille
+            newish_file = File.open("test_braille.txt", "r")
+            expected_characters = newish_file.read
+            newish_file.close
+            expect(expected_characters).to eq("hi")
         end
 
-        it 'can split lines over 80 dots' do 
+        xit 'can split lines over 80 dots' do 
             dictionary3 = Dictionary.new("the ring cannot be destroyed by anything here that we possess") 
             dictionary3.format_braille
 

@@ -33,6 +33,7 @@ attr_reader :braille_characters, :message_input, :english_characters
         }
         @message_input = message_input
         @english_characters = @braille_characters.invert
+        # @braille_input = braille_input
         # require 'pry'; binding.pry
     end
 
@@ -52,8 +53,7 @@ attr_reader :braille_characters, :message_input, :english_characters
     end
 
     def format_braille 
-        braille = File.open("braille.txt", "w")
-
+        braille = File.open("test_braille.txt", "w")
         split_messages = split_lines(@message_input)
         # require'pry';binding.pry
         split_messages.each do |split_message|
@@ -65,12 +65,18 @@ attr_reader :braille_characters, :message_input, :english_characters
                 top << receive_character(letter)[0]
                 middle << receive_character(letter)[1]
                 bottom << receive_character(letter)[2]
-                # braille.write("#{top}\n#{middle}\n#{bottom}\n")
             end
             braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
-        
         braille.close
+    end
+
+    def read_braille
+        og_message = File.open("original_message.txt", "w")
+        og_message.write(message)
+        #figure out how to read the formatted braille - probably will show up nested - get braille to print to test file and then try to read that
+        # og_message.close
+        require'pry';binding.pry
     end
 
     def split_lines(message)
