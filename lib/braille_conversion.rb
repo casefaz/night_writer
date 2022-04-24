@@ -1,7 +1,7 @@
 class BrailleConversion
 
 attr_reader :braille_hash, :english_message
-    def initialize(english_message)
+    def initialize(english_message)#change this to take in message.txt file path
         @english_message = english_message
         @braille_hash = Dictionary.new.braille_characters
         # require'pry';binding.pry

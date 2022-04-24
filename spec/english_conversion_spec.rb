@@ -11,26 +11,16 @@ RSpec.describe EnglishConversion do
         expect(@english_conversion).to be_a(EnglishConversion)
     end
 
-    xit 'has an english hash' do
-        expect(@dictionary.english_characters[["0.", ".0", "00"]]).to eq("z")
+    it 'has an english hash' do
+        expect(@english_conversion.english_characters["0..000"]).to eq("z")
     end
 
-    xit '#braille_to_english' do
-        expect(@dictionary.braille_to_english(["0.", ".0", "00"])).to eq("z")
+    it 'can read braille characters' do 
+        expect(@english_conversion.long_braille_array).to eq(["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00."])
     end
 
-    xit 'can format the braille into english' do 
-        @english_conversion2.read_braille
-        newish_file = File.open("test_braille.txt", "r")
-        expected_characters = newish_file.read
-        newish_file.close
-        expect(expected_characters).to eq("hi")
+    it 'can translate the braille array' do 
+        expect(@english_conversion.translate_to_english).to eq("hello")
     end
 
-    xit 'fake test' do 
-        newish_file = File.open("test_braille.txt", "r")
-        expected_characters = newish_file.readlines
-        newish_file.close
-        require'pry';binding.pry
-    end
 end
