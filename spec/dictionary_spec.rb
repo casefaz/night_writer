@@ -5,6 +5,7 @@ RSpec.describe Dictionary do
 
     before :each do 
         @dictionary = Dictionary.new("a")
+        @dictionary2 = Dictionary.new("hello")
     end
 
         it 'exists' do 
@@ -18,7 +19,7 @@ RSpec.describe Dictionary do
         end
 
         it 'has an english hash' do
-            expect(@dictionary.english_characters["0.", ".0", "00"]).to eq("z")
+            expect(@dictionary.english_characters[["0.", ".0", "00"]]).to eq("z")
         end
 
         it 'can test for multiple characters' do 
@@ -33,6 +34,14 @@ RSpec.describe Dictionary do
         it '#receive_character' do
             expect(@dictionary.receive_character("a")).to eq (["0.", "..", ".."])
             expect(@dictionary.receive_character("!")).to eq("Not familiar, unfortunately")
+        end
+
+        it '#braille_to_english' do
+            expect(@dictionary.braille_to_english(["0.", ".0", "00"])).to eq("z")
+        end
+
+        it 'can format the braille into english' do 
+            
         end
 
         it 'can split lines over 80 dots' do 

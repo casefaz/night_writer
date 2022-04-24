@@ -33,7 +33,7 @@ attr_reader :braille_characters, :message_input, :english_characters
         }
         @message_input = message_input
         @english_characters = @braille_characters.invert
-        require 'pry'; binding.pry
+        # require 'pry'; binding.pry
     end
 
     def receive_character(english_character)
@@ -42,6 +42,13 @@ attr_reader :braille_characters, :message_input, :english_characters
        else
         @braille_characters[english_character]
        end
+    end
+    
+    def braille_to_english(braille)
+        if @english_characters.keys.include?(braille)
+            @english_characters[braille]
+        end
+        # require 'pry'; binding.pry
     end
 
     def format_braille 
