@@ -19,15 +19,18 @@ RSpec.describe Dictionary do
             expect(@dictionary.braille_characters["a"]).to eq(["0.", "..", ".."])
             expect(@dictionary.braille_characters.count).to eq 27
         end
-
+#potential test for multiple characters to braille
         it '#receive_character' do
             expect(@dictionary.receive_character("a")).to eq (["0.", "..", ".."])
+            expect(@dictionary.receive_character("!")).to eq("Not familiar, unfortunately")
         end
 
-        it 'can format the braille' do
-            @dictionary2 = Dictionary.new("hello world")
+        it 'can split lines over 80 dots' do 
+            dictionary3 = Dictionary.new("the ring cannot be destroyed by anything here that we possess") 
+            dictionary3.format_braille
 
-            expect(@dictionary2.format_braille.length).to eq(68) 
+            expect(dictionary3.split_lines("the ring cannot be destroyed by anything here that we possess")).to be_a(Array)
+            expect(File.size("braille.txt")).to eq(368)
         end
 
 end

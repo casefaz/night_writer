@@ -34,24 +34,49 @@ attr_reader :braille_characters, :message_input
         @message_input = message_input
     end
 
-    def receive_character(character) #take input from message and return matching braille character
-        #write to txt file now or return a string and write to txt later
-        @braille_characters[character]
+    def receive_character(english_character)
+       if @braille_characters.keys.include?(english_character) == false
+        p "Not familiar, unfortunately"
+       else
+        @braille_characters[english_character]
+       end
     end
 
-    def format_braille #consider edge cases, no more than 80 characters(40 braille characters)
+    def format_braille 
         braille = File.open("braille.txt", "w")
-        top = ""
-        middle = ""
-        bottom = ""
-        @message_input.split("").each do |letter|
-            top << receive_character(letter)[0]
-            middle << receive_character(letter)[1]
-            bottom << receive_character(letter)[2]
+        # top = ""
+        # middle = ""
+        # bottom = ""
+        split_messages = split_lines(@message_input)
+        # require'pry';binding.pry
+        split_messages.each do |split_message|
+            top = ""
+            middle = ""
+            bottom = ""
+            split_message.split("").each do |letter|
+        # require'pry';binding.pry
+                top << receive_character(letter)[0]
+                middle << receive_character(letter)[1]
+                bottom << receive_character(letter)[2]
+                # braille.write("#{top}\n#{middle}\n#{bottom}\n")
+            end
+            braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
-        # require 'pry'; binding.pry
-        braille.write("#{top}\n#{middle}\n#{bottom}")
-        return "#{top}\n#{middle}\n#{bottom}"
-        # require 'pry'; binding.pry
+        # braille.write("#{top}\n#{middle}\n#{bottom}")
+            #figure out how to split either every 40 english characters(@message_input) or every 80 braille characters(braille.write) onto new lines
+        braille.close
+    end
+
+    def split_lines(message)
+        under_40 = []
+        if message.length <= 39
+            under_40 << message
+        else
+            while message.length > 0
+                under_40 << message.slice!(0..39)
+            end
+        end
+        # require'pry';binding.pry
+        under_40
     end
 end
