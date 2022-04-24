@@ -19,7 +19,16 @@ RSpec.describe Dictionary do
             expect(@dictionary.braille_characters["a"]).to eq(["0.", "..", ".."])
             expect(@dictionary.braille_characters.count).to eq 27
         end
-#potential test for multiple characters to braille
+        
+        it 'can test for multiple characters' do 
+            expected = ("0.0.0.0.0.\n00.00.0..0\n....0.0.0.\n")
+            @dictionary2.format_braille
+            new_file = File.open("braille.txt")
+            expected_characters = new_file.read
+            new_file.close
+            expect(expected_characters).to eq(expected)
+        end
+
         it '#receive_character' do
             expect(@dictionary.receive_character("a")).to eq (["0.", "..", ".."])
             expect(@dictionary.receive_character("!")).to eq("Not familiar, unfortunately")

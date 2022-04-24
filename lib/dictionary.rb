@@ -32,6 +32,8 @@ attr_reader :braille_characters, :message_input
         " " => ["..", "..", ".."]
         }
         @message_input = message_input
+        @english_characters = @braille_characters.invert
+        require 'pry'; binding.pry
     end
 
     def receive_character(english_character)
@@ -44,9 +46,7 @@ attr_reader :braille_characters, :message_input
 
     def format_braille 
         braille = File.open("braille.txt", "w")
-        # top = ""
-        # middle = ""
-        # bottom = ""
+
         split_messages = split_lines(@message_input)
         # require'pry';binding.pry
         split_messages.each do |split_message|
@@ -62,8 +62,7 @@ attr_reader :braille_characters, :message_input
             end
             braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
-        # braille.write("#{top}\n#{middle}\n#{bottom}")
-            #figure out how to split either every 40 english characters(@message_input) or every 80 braille characters(braille.write) onto new lines
+        
         braille.close
     end
 
@@ -76,7 +75,6 @@ attr_reader :braille_characters, :message_input
                 under_40 << message.slice!(0..39)
             end
         end
-        # require'pry';binding.pry
         under_40
     end
 end
