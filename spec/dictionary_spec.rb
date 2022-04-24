@@ -3,11 +3,10 @@ require './lib/dictionary'
 
 RSpec.describe Dictionary do 
 
-    before :each do 
-        @dictionary = Dictionary.new
+    it 'exists and has attributes' do 
+        dictionary = Dictionary.new
+        expect(dictionary).to be_a(Dictionary)
+        expect(dictionary.braille_characters["a"]).to eq(["0.", "..", ".."])
+        expect(dictionary.english_characters[["0.", ".0", "00"]]).to eq("z")
     end
-
-        it 'exists' do 
-            expect(@dictionary).to be_a(Dictionary)
-        end
 end

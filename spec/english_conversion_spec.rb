@@ -27,7 +27,7 @@ RSpec.describe EnglishConversion do
         expect(expected_characters).to eq("hi")
     end
 
-    it 'fake test' do 
+    xit 'fake test' do 
         newish_file = File.open("test_braille.txt", "r")
         expected_characters = newish_file.readlines
         newish_file.close
