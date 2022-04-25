@@ -9,10 +9,7 @@ end
 
 braille_file = File.open(ARGV[0], "r")
 og_message_file = File.open(ARGV[1], "w")
-english_translator = EnglishTranslator.new 
-
-new_text_array = braille_file.read 
+english_translator = EnglishTranslator.new(braille_file.read) 
 
 p english_translator.message
-
-braille_input = new_text_array.join
+english_translator.translate_to_english

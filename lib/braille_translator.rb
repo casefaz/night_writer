@@ -1,11 +1,13 @@
 class BrailleTranslator
 
-attr_reader :braille_hash, :english_message, :read_english
-    def initialize#change this to take in message.txt file path
-        @english_message = File.open("message.txt", "r")
+attr_reader :braille_hash, :english_message, :read_english, :user_input1, :user_input2
+    def initialize(user_input1, user_input2)
+        @english_message = File.open(user_input1, "r")
         @read_english = @english_message.read.chomp
-        @braille = File.open("test_braille.txt", "w")
+        @braille = File.open(user_input2, "w")
         @braille_hash = Dictionary.new.braille_characters
+        @user_input1 = user_input1
+        @user_input2 = user_input2
         # require'pry';binding.pry
     end
 
@@ -14,7 +16,7 @@ attr_reader :braille_hash, :english_message, :read_english
     end
 
     def message
-        p "Created '#{ARGV[1]}' containing #{character_count} characters"
+        "Created '#{@user_input2}' containing #{count_characters} characters"
     end
 
     def receive_character(english_character)

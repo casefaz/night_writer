@@ -4,7 +4,7 @@ require './lib/english_translator'
 
 RSpec.describe EnglishTranslator do 
     before :each do
-        @english_translator = EnglishTranslator.new(["0.0.0.0.0.\n", "00.00.0..0\n", "....0.0.0.\n"])
+        @english_translator = EnglishTranslator.new('braille.txt','original_message.txt')
     end
 
     it 'exists' do 
@@ -12,22 +12,23 @@ RSpec.describe EnglishTranslator do
     end
 
     it 'has a welcome message' do
-        expect(@english_translator.message).to eq("Created 'original.txt' containing 47 characters")
+        expect(@english_translator.message).to eq("Created 'original_message.txt' containing 5 characters")
     end
 
     it 'can count the number of characters in incoming file' do
-        expect(@english_translator.count_characters).to eq(File.size("test_braille.txt"))
+        expect(@english_translator.count_characters).to eq(5)
     end
 
     it 'has an english hash' do
         expect(@english_translator.english_characters["0..000"]).to eq("z")
     end
 
-    xit 'can read braille characters' do 
+    it 'can read braille characters' do 
+        
         expect(@english_translator.long_braille_array).to eq(["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00."])
     end
 
-    xit 'can translate the braille array' do 
+    it 'can translate the braille array' do 
         expect(@english_translator.translate_to_english).to eq("hello")
     end
 
