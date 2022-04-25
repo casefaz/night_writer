@@ -1,10 +1,22 @@
-class BrailleConversion
+class BrailleTranslator
 
-attr_reader :braille_hash, :english_message
-    def initialize(english_message)#change this to take in message.txt file path
-        @english_message = english_message
+attr_reader :braille_hash, :english_message, :read_english, :user_input1, :user_input2
+    def initialize(user_input1, user_input2)
+        @english_message = File.open(user_input1, "r")
+        @read_english = @english_message.read.chomp
+        @braille = File.open(user_input2, "w")
         @braille_hash = Dictionary.new.braille_characters
+        @user_input1 = user_input1
+        @user_input2 = user_input2
         # require'pry';binding.pry
+    end
+
+    def count_characters
+        @read_english.length
+    end
+
+    def message
+        "Created '#{@user_input2}' containing #{count_characters} characters"
     end
 
     def receive_character(english_character)
@@ -15,31 +27,33 @@ attr_reader :braille_hash, :english_message
         end
      end
 
-     def format_braille(file_path) #writes to the braille file
-        braille = File.open(file_path, "w")
-        split_messages = split_lines(@english_message)
+     def format_braille #writes to the braille file
+        @braille
+        split_messages = split_lines(@read_english)
         # require'pry';binding.pry
         split_messages.each do |split_message|
             top = ""
             middle = ""
             bottom = ""
+            # require'pry';binding.pry
             split_message.split("").each do |letter|
         # require'pry';binding.pry
                 top << receive_character(letter)[0]
                 middle << receive_character(letter)[1]
                 bottom << receive_character(letter)[2]
             end
-            braille.write("#{top}\n#{middle}\n#{bottom}\n")
+            @braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
-        braille.close
+        @braille.close
     end
 
     def split_lines(message)
         under_40 = []
-        if english_message.length <= 39
+        # require 'pry';binding.pry
+        if message.length <= 39
             under_40 << message
         else
-            while english_message.length > 0
+            while message.length > 0
                 under_40 << message.slice!(0..39)
             end
         end
