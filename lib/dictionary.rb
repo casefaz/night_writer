@@ -31,8 +31,6 @@ attr_reader :braille_characters, :english_characters
         "z" => ["0.", ".0", "00"],
         " " => ["..", "..", ".."]
         }
-        # @braille_input = braille_input
-        # require 'pry'; binding.pry
     end
 
     def english_characters
@@ -40,61 +38,6 @@ attr_reader :braille_characters, :english_characters
         english_characters.each do |key, value|
             english_characters[key]= value.join
         end
-        # require 'pry';binding.pry
         return english_characters.invert
     end
-
-    # def receive_character(english_character)
-    #    if @braille_characters.keys.include?(english_character) == false
-    #     p "Not familiar, unfortunately"
-    #    else
-    #     @braille_characters[english_character]
-    #    end
-    # end
-    
-    # def braille_to_english(braille)
-    #     if @english_characters.keys.include?(braille)
-    #         @english_characters[braille]
-    #     end
-    #     # require 'pry'; binding.pry
-    # end
-
-    # def format_braille 
-    #     braille = File.open("test_braille.txt", "w")
-    #     split_messages = split_lines(@message_input)
-    #     # require'pry';binding.pry
-    #     split_messages.each do |split_message|
-    #         top = ""
-    #         middle = ""
-    #         bottom = ""
-    #         split_message.split("").each do |letter|
-    #     # require'pry';binding.pry
-    #             top << receive_character(letter)[0]
-    #             middle << receive_character(letter)[1]
-    #             bottom << receive_character(letter)[2]
-    #         end
-    #         braille.write("#{top}\n#{middle}\n#{bottom}\n")
-    #     end
-    #     braille.close
-    # end
-
-    # def read_braille
-    #     og_message = File.open("original_message.txt", "w")
-    #     og_message.write(message)
-    #     #figure out how to read the formatted braille - probably will show up nested - get braille to print to test file and then try to read that
-    #     # og_message.close
-    #     require'pry';binding.pry
-    # end
-
-    # def split_lines(message)
-    #     under_40 = []
-    #     if message.length <= 39
-    #         under_40 << message
-    #     else
-    #         while message.length > 0
-    #             under_40 << message.slice!(0..39)
-    #         end
-    #     end
-    #     under_40
-    # end
 end

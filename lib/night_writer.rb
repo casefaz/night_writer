@@ -17,6 +17,5 @@ character_count = text_array.join.length
 p "Created '#{braille_file_path}' containing #{character_count} characters"
 
 message_input = text_array.join
-dictionary = Dictionary.new(message_input)
-dictionary.format_braille
+
 # require 'pry'; binding.pry

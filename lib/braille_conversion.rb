@@ -1,8 +1,9 @@
 class BrailleConversion
 
 attr_reader :braille_hash, :english_message
-    def initialize(english_message)#change this to take in message.txt file path
-        @english_message = english_message
+    def initialize#change this to take in message.txt file path
+        @english_message = File.open("message.txt", "r")
+        @braille = File.open("test_braille.txt", "w")
         @braille_hash = Dictionary.new.braille_characters
         # require'pry';binding.pry
     end
@@ -15,31 +16,33 @@ attr_reader :braille_hash, :english_message
         end
      end
 
-     def format_braille(file_path) #writes to the braille file
-        braille = File.open(file_path, "w")
-        split_messages = split_lines(@english_message)
+     def format_braille #writes to the braille file
+        @braille
+        split_messages = split_lines(@english_message.read)
         # require'pry';binding.pry
         split_messages.each do |split_message|
             top = ""
             middle = ""
             bottom = ""
+            # require'pry';binding.pry
             split_message.split("").each do |letter|
         # require'pry';binding.pry
                 top << receive_character(letter)[0]
                 middle << receive_character(letter)[1]
                 bottom << receive_character(letter)[2]
             end
-            braille.write("#{top}\n#{middle}\n#{bottom}\n")
+            @braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
-        braille.close
+        @braille.close
     end
 
     def split_lines(message)
         under_40 = []
-        if english_message.length <= 39
+        # require 'pry';binding.pry
+        if message.length <= 39
             under_40 << message
         else
-            while english_message.length > 0
+            while message.length > 0
                 under_40 << message.slice!(0..39)
             end
         end

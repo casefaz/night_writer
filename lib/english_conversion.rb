@@ -1,10 +1,8 @@
-
-
-
 class EnglishConversion 
 
 attr_reader :braille_message, :english_characters
     def initialize(braille_message)
+        @message = File.open("original_message.txt", "w")
         @braille_message = File.open("test_braille.txt", "r")
         @english_characters = Dictionary.new.english_characters
         # require 'pry';binding.pry
@@ -18,6 +16,7 @@ attr_reader :braille_message, :english_characters
         until expected_characters.join.length == 0
             braille_array << "#{expected_characters[0].slice!(0..1)}#{expected_characters[1].slice!(0..1)}#{expected_characters[2].slice!(0..1)}"
         end
+        require 'pry';binding.pry
         return braille_array
     end
     
@@ -29,14 +28,9 @@ attr_reader :braille_message, :english_characters
                 input_collector << @english_characters[element]
             end
         end
+        @message.write(input_collector.join)
+        @message.close
         input_collector.join
     end
-
-    # def braille_to_english(braille)
-    #     if @english_characters.keys.include?(braille)
-    #         @english_characters[braille]
-    #     end
-    #     # require 'pry'; binding.pry
-    # end
 
 end
