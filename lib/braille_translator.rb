@@ -1,4 +1,4 @@
-class BrailleConversion
+class BrailleTranslator
 
 attr_reader :braille_hash, :english_message
     def initialize#change this to take in message.txt file path
