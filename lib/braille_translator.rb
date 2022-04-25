@@ -13,6 +13,10 @@ attr_reader :braille_hash, :english_message, :read_english
         @read_english.length
     end
 
+    def message
+        p "Created '#{ARGV[1]}' containing #{character_count} characters"
+    end
+
     def receive_character(english_character)
         if @braille_hash.keys.include?(english_character) == false
          p "Not familiar, unfortunately"

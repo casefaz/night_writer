@@ -11,9 +11,8 @@ braille_file = File.open(ARGV[1], "w")
 braille_translator = BrailleTranslator.new
 
 text_array = message_file.readlines
-character_count = text_array.join.length
 
-p "Created '#{braille_file_path}' containing #{character_count} characters"
+p braille_translator.message
 
 message_input = text_array.join
 

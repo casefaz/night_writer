@@ -8,6 +8,11 @@ RSpec.describe BrailleTranslator do
         expect(braille_translator).to be_a(BrailleTranslator)
         expect(braille_translator.read_english).to eq(expected)
     end
+    
+    it 'has a welcome message' do 
+        braille_translator = BrailleTranslator.new
+        expect(braille_translator.message).to eq("Created 'braille.txt' containing 342 characters")
+    end
 
     it 'has a braille hash' do 
         braille_translator = BrailleTranslator.new

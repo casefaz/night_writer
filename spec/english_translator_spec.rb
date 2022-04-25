@@ -11,6 +11,10 @@ RSpec.describe EnglishTranslator do
         expect(@english_translator).to be_a(EnglishTranslator)
     end
 
+    it 'has a welcome message' do
+        expect(@english_translator.message).to eq("Created 'original.txt' containing 47 characters")
+    end
+
     it 'can count the number of characters in incoming file' do
         expect(@english_translator.count_characters).to eq(File.size("test_braille.txt"))
     end
