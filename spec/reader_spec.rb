@@ -16,4 +16,8 @@ RSpec.describe Reader do
         expect(reader.output_file_path).to eq('braille.txt')
     end
 
+    it 'can count the incoming number of characters' do 
+        reader = Reader.new('message.txt', 'braille.txt')
+        expect(reader.character_count).to eq(46)
+    end
 end

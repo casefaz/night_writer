@@ -3,9 +3,6 @@ if ARGV.length != 2
     exit
 end
 
-braille_file_path = ARGV[0]
-original_message_file_path = ARGV[1]
-
 braille_file = File.open(ARGV[0], "r")
 og_message_file = File.open(ARGV[1], "w")
 

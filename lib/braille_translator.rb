@@ -1,11 +1,16 @@
 class BrailleTranslator
 
-attr_reader :braille_hash, :english_message
+attr_reader :braille_hash, :english_message, :read_english
     def initialize#change this to take in message.txt file path
         @english_message = File.open("message.txt", "r")
+        @read_english = @english_message.read.chomp
         @braille = File.open("test_braille.txt", "w")
         @braille_hash = Dictionary.new.braille_characters
         # require'pry';binding.pry
+    end
+
+    def count_characters
+        @read_english.length
     end
 
     def receive_character(english_character)
@@ -18,7 +23,7 @@ attr_reader :braille_hash, :english_message
 
      def format_braille #writes to the braille file
         @braille
-        split_messages = split_lines(@english_message.read)
+        split_messages = split_lines(@read_english)
         # require'pry';binding.pry
         split_messages.each do |split_message|
             top = ""

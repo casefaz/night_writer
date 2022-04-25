@@ -1,15 +1,14 @@
 require './lib/dictionary'
+require './lib/braille_translator'
 
 if ARGV.length != 2 
     p "Error"
     exit
 end
 
-message_file_path = ARGV[0]
-braille_file_path = ARGV[1]
-
-message_file = File.open(ARGV[0], "r") #makes it a file object, r makes it readable
+message_file = File.open(ARGV[0], "r")
 braille_file = File.open(ARGV[1], "w")
+braille_translator = BrailleTranslator.new
 
 text_array = message_file.readlines
 character_count = text_array.join.length

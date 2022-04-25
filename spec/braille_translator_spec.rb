@@ -4,9 +4,9 @@ require './lib/braille_translator'
 RSpec.describe BrailleTranslator do
     it 'exists' do 
         braille_translator = BrailleTranslator.new
-        expected = File.open("message.txt").readlines
+        expected = File.open("message.txt").read
         expect(braille_translator).to be_a(BrailleTranslator)
-        expect(braille_translator.english_message.readlines).to eq(expected)
+        expect(braille_translator.read_english).to eq(expected)
     end
 
     it 'has a braille hash' do 
@@ -19,6 +19,11 @@ RSpec.describe BrailleTranslator do
         braille_translator = BrailleTranslator.new
         expect(braille_translator.receive_character("a")).to eq (["0.", "..", ".."])
         expect(braille_translator.receive_character("!")).to eq("Not familiar, unfortunately")
+    end
+
+    it 'can count the number of characters in the incoming file' do
+        braille_translator = BrailleTranslator.new
+        expect(braille_translator.count_characters).to eq(File.size("message.txt"))
     end
 
     it 'can test for multiple characters' do 
