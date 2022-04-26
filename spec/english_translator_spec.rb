@@ -11,6 +11,11 @@ RSpec.describe EnglishTranslator do
         expect(@english_translator).to be_a(EnglishTranslator)
     end
 
+    it 'has attributes' do 
+        expect(@english_translator.user_input1).to eq('braille.txt')
+        expect(@english_translator.user_input2).to eq('original_message.txt')
+    end
+
     it 'has a welcome message' do
         expect(@english_translator.message).to eq("Created 'original_message.txt' containing 5 characters")
     end
@@ -24,7 +29,6 @@ RSpec.describe EnglishTranslator do
     end
 
     it 'can read braille characters' do 
-        
         expect(@english_translator.long_braille_array).to eq(["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00."])
     end
 
