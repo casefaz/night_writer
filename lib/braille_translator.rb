@@ -40,7 +40,6 @@ attr_reader :braille_hash, :english_message, :read_english, :user_input1, :user_
             end
             @braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
-        return  
         @braille.close
     end
 

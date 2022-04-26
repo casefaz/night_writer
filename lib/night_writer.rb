@@ -5,9 +5,6 @@ if ARGV.length != 2
     p "Error"
     exit
 end
-# require 'pry'; binding.pry
-message_file = File.open(ARGV[0], "r")
-braille_file = File.open(ARGV[1], "w")
 braille_translator = BrailleTranslator.new(ARGV[0], ARGV[1])
 
 
