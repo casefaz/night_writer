@@ -20,18 +20,13 @@ attr_reader :english_characters, :user_input1, :user_input2
     end
 
     def long_braille_array
-        # expected_characters << @read_braille
         braille_array = []
-        # require 'pry'; binding.pry
         counter = 0
-# require 'pry';binding.pry
         while counter < count_characters * 6
             counter += 1
-            # require 'pry';binding.pry
             braille_array << "#{@expected_characters[0].slice!(0..1)}#{@expected_characters[1].slice!(0..1)}#{@expected_characters[2].slice!(0..1)}"
 
         end
-        # require 'pry';binding.pry
         return braille_array
     end
     

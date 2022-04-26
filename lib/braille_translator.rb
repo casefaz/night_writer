@@ -8,7 +8,6 @@ attr_reader :braille_hash, :english_message, :read_english, :user_input1, :user_
         @braille_hash = Dictionary.new.braille_characters
         @user_input1 = user_input1
         @user_input2 = user_input2
-        # require'pry';binding.pry
     end
 
     def count_characters
@@ -27,29 +26,26 @@ attr_reader :braille_hash, :english_message, :read_english, :user_input1, :user_
         end
      end
 
-     def format_braille #writes to the braille file
+     def format_braille
         @braille
         split_messages = split_lines(@read_english)
-        # require'pry';binding.pry
         split_messages.each do |split_message|
             top = ""
             middle = ""
             bottom = ""
-            # require'pry';binding.pry
             split_message.split("").each do |letter|
-        # require'pry';binding.pry
                 top << receive_character(letter)[0]
                 middle << receive_character(letter)[1]
                 bottom << receive_character(letter)[2]
             end
             @braille.write("#{top}\n#{middle}\n#{bottom}\n")
         end
+        return  
         @braille.close
     end
 
     def split_lines(message)
         under_40 = []
-        # require 'pry';binding.pry
         if message.length <= 39
             under_40 << message
         else
